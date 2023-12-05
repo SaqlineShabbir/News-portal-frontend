@@ -1,9 +1,10 @@
+import Footer from "../../components/home/shared/Footer";
 
 
 const Home = ()=>{
     return (
         <div>
-        <p className="text-black">This is Home page </p>
+       <Footer></Footer>
         </div>
     )
 }
