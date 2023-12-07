@@ -6,7 +6,7 @@ const LatestArtiCard = ({article}) => {
     return (
         <Link to={{
             pathname: `/article/x`,
-            search: `?id=${article?.id}`,
+            search: `?id=${article?._id}`,
           }}>
         <div className='py-5  lg:w-[350px]'>
             <div className=''>

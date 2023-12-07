@@ -1,70 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import LatestArtiCard from './LatestArtiCard';
 import MostPopular from '../most-popular/MostPopular';
+import axiosInstance from '../../../../utils/axios';
 
 const LatestArticles = () => {
-    const products = [
-        {
-          id: '1',
-          title: 'Another Big Apartment Project Slated for Broad Ripple Company',
-          description:
-            'Web development is the work involved in developing a Web site for the Internet or an intranet. Web development can range from developing a simple single static page of plain text to complex web applications, electronic businesses, and social network services',
-          date: 'may 10, 2023',
-          link: 'https://www.onlinecoursereport.com/wp-content/uploads/2020/07/shutterstock_394793860-768x588.jpg',
-          thumbnail:
-            'https://www.adorama.com/alc/wp-content/uploads/2018/07/shutterstock_170815865-825x465.jpg',
-        },
-        {
-          id: '2',
-          title: 'Another Big Apartment Project Slated for Broad Ripple Company',
-          description:
-            'Web development is the work involved in developing a Web site for the Internet or an intranet. Web development can range from developing a simple single static page of plain text to complex web applications, electronic businesses, and social network services',
-          date: 'may 10, 2023',
-          link: 'https://www.onlinecoursereport.com/wp-content/uploads/2020/07/shutterstock_394793860-768x588.jpg',
-          thumbnail:
-            'https://www.adorama.com/alc/wp-content/uploads/2018/07/shutterstock_170815865-825x465.jpg',
-        },
-        {
-          id: '3',
-          title: 'Another Big Apartment Project Slated for Broad Ripple Company',
-          description:
-            'Web development is the work involved in developing a Web site for the Internet or an intranet. Web development can range from developing a simple single static page of plain text to complex web applications, electronic businesses, and social network services',
-          date: 'may 10, 2023',
-          link: 'https://www.onlinecoursereport.com/wp-content/uploads/2020/07/shutterstock_394793860-768x588.jpg',
-          thumbnail:
-            'https://www.adorama.com/alc/wp-content/uploads/2018/07/shutterstock_170815865-825x465.jpg',
-        },
-        {
-          id: '4',
-          title: 'Another Big Apartment Project Slated for Broad Ripple Company',
-          description:
-            'Web development is the work involved in developing a Web site for the Internet or an intranet. Web development can range from developing a simple single static page of plain text to complex web applications, electronic businesses, and social network services',
-          date: 'may 10, 2023',
-          link: 'https://www.onlinecoursereport.com/wp-content/uploads/2020/07/shutterstock_394793860-768x588.jpg',
-          thumbnail:
-            'https://www.adorama.com/alc/wp-content/uploads/2018/07/shutterstock_170815865-825x465.jpg',
-        },
-        {
-          id: '4',
-          title: 'Another Big Apartment Project Slated for Broad Ripple Company',
-          description:
-            'Web development is the work involved in developing a Web site for the Internet or an intranet. Web development can range from developing a simple single static page of plain text to complex web applications, electronic businesses, and social network services',
-          date: 'may 10, 2023',
-          link: 'https://www.onlinecoursereport.com/wp-content/uploads/2020/07/shutterstock_394793860-768x588.jpg',
-          thumbnail:
-            'https://www.adorama.com/alc/wp-content/uploads/2018/07/shutterstock_170815865-825x465.jpg',
-        },
-        {
-          id: '4',
-          title: 'Another Big Apartment Project Slated for Broad Ripple Company',
-          description:
-            'Web development is the work involved in developing a Web site for the Internet or an intranet. Web development can range from developing a simple single static page of plain text to complex web applications, electronic businesses, and social network services',
-          date: 'may 10, 2023',
-          link: 'https://www.onlinecoursereport.com/wp-content/uploads/2020/07/shutterstock_394793860-768x588.jpg',
-          thumbnail:
-            'https://www.adorama.com/alc/wp-content/uploads/2018/07/shutterstock_170815865-825x465.jpg',
-        },
-      ];
+
+  //get data from server
+  const [articleData,setArticleData]=useState([])
+  useEffect(()=>{
+
+    axiosInstance.get("/article")
+    .then((res)=>{
+       
+      setArticleData(res?.data.data)
+    })
+    },[])
     return (
         <div>
             <div className='lg:flex w-[100%]  lg:px-[200px] px-10'>
@@ -76,7 +26,7 @@ const LatestArticles = () => {
                    </div>
 
                    <div className='grid lg:grid-cols-2 lg:gap-9'>
-                   {products?.map((article) => (
+                   {articleData?.map((article) => (
         <LatestArtiCard key={article.id} article={article}></LatestArtiCard>
       ))}
 

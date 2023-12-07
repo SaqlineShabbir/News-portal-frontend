@@ -6,6 +6,7 @@ import {
 import Home from "../pages/Home/Home";
 import Main from "../layout/Main";
 import LatestArtiDetails from "../components/home/latest-articles/articles/LatestArtiDetails";
+import NewsDetalils from "../pages/news-details/NewsDetalils";
 export const router = createBrowserRouter([
     {
       path: "/",
@@ -18,6 +19,10 @@ export const router = createBrowserRouter([
         {
           path: '/article/:articleId',
           element: <LatestArtiDetails></LatestArtiDetails>,
+        },
+        {
+          path: '/news/:newsId',
+          element: <NewsDetalils></NewsDetalils>,
         },
       ]
     },

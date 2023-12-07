@@ -5,7 +5,7 @@ import Footer from "../../components/home/shared/Footer";
 const Home = ()=>{
     return (
         <div>
-            <LatestArticles></LatestArticles>
+        <LatestArticles></LatestArticles>
        <Footer></Footer>
         </div>
     )
