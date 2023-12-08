@@ -1,13 +1,14 @@
-import LatestArticles from "../../components/home/latest-articles/articles/LatestArticles";
+import News from "../../components/home/News";
+import PerfomanceTraining from "../../components/home/PerfomanceTraining";
 import Footer from "../../components/home/shared/Footer";
 
 
-const Home = ()=>{
+const Home = () => {
     return (
         <div>
+            <News />
+            <PerfomanceTraining />
             
-        <LatestArticles></LatestArticles>
-       <Footer></Footer>
         </div>
     )
 }
