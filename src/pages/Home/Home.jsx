@@ -1,10 +1,14 @@
+import News from "../../components/home/News";
+import PerfomanceTraining from "../../components/home/PerfomanceTraining";
 import Footer from "../../components/home/shared/Footer";
 
 
-const Home = ()=>{
+const Home = () => {
     return (
         <div>
-       <Footer></Footer>
+            <News />
+            <PerfomanceTraining />
+            <Footer />
         </div>
     )
 }
