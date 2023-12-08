@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import axiosInstance from '../../utils/axios';
 
 const News = () => {
     const features = [
@@ -32,6 +33,14 @@ const News = () => {
         },
     ];
 
+    const[allNews,setAllNews]=useState([])
+    useEffect(()=>{
+    axiosInstance.get('/news')
+    .then((res)=>{
+        setAllNews(res?.data.data)
+    })
+    },[])
+
     return (
         <div className='flex justify-start'>
             <div className='md:mx-52 mx-4 my-20 h-full'>
@@ -40,9 +49,9 @@ const News = () => {
 
                 <div className='grid grid-cols-1 sm:grid-cols-2 gap-8'>
                     {
-                        features.map((feature) => (
+                        allNews.map((feature) => (
                             <div>
-                                <img className='w-full md:w-80 h-52 rounded' src={feature.img} alt="image" />
+                                <img className='w-full md:w-80 h-52 rounded' src={feature.avatar} alt="image" />
                                 <div className='space-y-4'>
                                     <h2 className='text-2xl my-2  hover:text-blue-400 cursor-pointer duration-300'>{feature.title}</h2>
                                     <div className='flex space-x-4'>
