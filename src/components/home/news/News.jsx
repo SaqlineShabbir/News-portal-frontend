@@ -3,37 +3,6 @@ import axiosInstance from '../../../utils/axios';
 import { Link } from 'react-router-dom';
 
 const News = () => {
-    const features = [
-        {
-            img: "https://i.ibb.co/zrsyxZJ/colombia.png",
-            title: "This is demo title not serious.",
-            user: "sujon sheikh",
-            date: "January 4, 2023",
-            description: "We woke reasonably late following the feast and free flowing wine the night before. After gathering ourselves and our packs, we headed down to our homestay family’s small dining"
-        },
-        {
-            img: "https://i.ibb.co/zrsyxZJ/colombia.png",
-            title: "This is demo title not serious.",
-            user: "sujon sheikh",
-            date: "January 4, 2023",
-            description: "We woke reasonably late following the feast and free flowing wine the night before. After gathering ourselves and our packs, we headed down to our homestay family’s small dining"
-        },
-        {
-            img: "https://i.ibb.co/zrsyxZJ/colombia.png",
-            title: "This is demo title not serious.",
-            user: "sujon sheikh",
-            date: "January 4, 2023",
-            description: "We woke reasonably late following the feast and free flowing wine the night before. After gathering ourselves and our packs, we headed down to our homestay family’s small dining"
-        },
-        {
-            img: "https://i.ibb.co/zrsyxZJ/colombia.png",
-            title: "This is demo title not serious.",
-            user: "sujon sheikh",
-            date: "January 4, 2023",
-            description: "We woke reasonably late following the feast and free flowing wine the night before. After gathering ourselves and our packs, we headed down to our homestay family’s small dining"
-        },
-    ];
-
     const[allNews,setAllNews]=useState([])
     useEffect(()=>{
     axiosInstance.get('/news')

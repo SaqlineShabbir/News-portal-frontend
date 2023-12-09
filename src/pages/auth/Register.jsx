@@ -1,17 +1,43 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
+import { AuthContext } from '../../context/AuthProvider'
 
 const Register = () => {
+    const [name,setName]=useState('')
+    const [email,setEmail]=useState('')
+    const [image,setImage]=useState(null)
+    const [password,setPassword]=useState('')
+    const [confirmPassword,setConfirmPassword]=useState('')
+    const [date,setDate]=useState('')
+    const {singnUp}=useContext(AuthContext)
+    const handleSubmit=(e)=>{
+        e.preventDefault()
+        if(password!=confirmPassword){
+            alert('passwoed does not match')
+        }
+        const formData = new FormData();
+        
+        formData.append('avatar',image);
+        formData.append('name',name)
+        formData.append('email',email)
+        formData.append('password',password)
+        formData.append('dateofbirth',date)
+        
+        singnUp(formData)
+        
+
+    }
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-200">
             <div className="max-w-md w-full p-6 border bg-white rounded-md shadow-md">
                 <h2 className="text-2xl font-semibold mb-6 text-center">Register as a volunteer</h2>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className="mb-4">
                         <label htmlFor="fullName" className="block text-gray-700 text-sm font-bold mb-2">
                             Full Name
                         </label>
                         <input
+                           onChange={(e)=>setName(e.target.value)}
                             type="text"
                             className="border border-gray-300 rounded-md w-full py-2 px-3 focus:outline-none focus:ring focus:border-blue-300"
                             placeholder="Enter your full name"
@@ -22,9 +48,44 @@ const Register = () => {
                             Email
                         </label>
                         <input
+                           onChange={(e)=>setEmail(e.target.value)}
                             type="email"
                             className="border border-gray-300 rounded-md w-full py-2 px-3 focus:outline-none focus:ring focus:border-blue-300"
                             placeholder="Enter your email"
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">
+                            Image
+                        </label>
+                        <input
+                           onChange={(e)=>setImage(e.target.files[0])}
+                            type="file"
+                            name='avatar'
+                            className="border border-gray-300 rounded-md w-full py-2 px-3 focus:outline-none focus:ring focus:border-blue-300"
+                            placeholder="Enter your email"
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">
+                            Password
+                        </label>
+                        <input
+                        onChange={(e)=>setPassword(e.target.value)}
+                            type="password"
+                            className="border border-gray-300 rounded-md w-full py-2 px-3 focus:outline-none focus:ring focus:border-blue-300"
+                            placeholder="Enter your password"
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">
+                            Confirm Password
+                        </label>
+                        <input
+                        onChange={(e)=>setConfirmPassword(e.target.value)}
+                            type="password"
+                            className="border border-gray-300 rounded-md w-full py-2 px-3 focus:outline-none focus:ring focus:border-blue-300"
+                            placeholder="Enter your password"
                         />
                     </div>
                     <div className="mb-4">
@@ -32,11 +93,12 @@ const Register = () => {
                             Date of Birth
                         </label>
                         <input
+                             onChange={(e)=>setDate(e.target.value)}
                             type="date"
                             className="border border-gray-300 rounded-md w-full py-2 px-3 focus:outline-none focus:ring focus:border-blue-300"
                         />
                     </div>
-                    <div className="mb-4">
+                    {/* <div className="mb-4">
                         <label htmlFor="description" className="block text-gray-700 text-sm font-bold mb-2">
                             Description
                         </label>
@@ -44,8 +106,8 @@ const Register = () => {
                             className="border border-gray-300 rounded-md w-full py-2 px-3 focus:outline-none focus:ring focus:border-blue-300"
                             placeholder="Enter a short description"
                         />
-                    </div>
-                    <div className="mb-4">
+                    </div> */}
+                    {/* <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2">
                             Organization
                         </label>
@@ -54,7 +116,7 @@ const Register = () => {
                             className="border border-gray-300 rounded-md w-full py-2 px-3 focus:outline-none focus:ring focus:border-blue-300"
                             placeholder="Enter your organization"
                         />
-                    </div>
+                    </div> */}
 
                     <p className='text-blue-500 hover:underline cursor-pointer flex justify-end text-sm'>
                         <a href="/login">
@@ -62,12 +124,12 @@ const Register = () => {
                         </a>
                     </p>
 
-                    <button
+                    <input
+                        value="Register"
                         type="submit"
                         className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
-                    >
-                        Register
-                    </button>
+                    />
+                       
                 </form>
             </div>
         </div>
