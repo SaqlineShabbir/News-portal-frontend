@@ -1,4 +1,4 @@
-import News from "../../components/home/News";
+import News from "../../components/home/news/News";
 import PerfomanceTraining from "../../components/home/PerfomanceTraining";
 import LatestArticles from "../../components/home/latest-articles/articles/LatestArticles";
 import Footer from "../../components/home/shared/Footer";
