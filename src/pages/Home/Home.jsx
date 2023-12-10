@@ -1,11 +1,11 @@
+import BannerGrid from "./BannerGrid";
 
-
-const Home = ()=>{
-    return (
-        <div>
-        <p className="text-black">This is Home page </p>
-        </div>
-    )
-}
+const Home = () => {
+  return (
+    <div>
+      <BannerGrid />
+    </div>
+  );
+};
 
 export default Home;
