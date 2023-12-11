@@ -1,18 +1,43 @@
 import React, { useContext, useState } from 'react'
 import { AuthContext } from '../../context/AuthProvider'
+import axiosInstance from '../../utils/axios'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
     const [email,setEmail]=useState('')
     const [password,setPassword]=useState('')
+    const navigate =useNavigate()
 
-    const {singnUp,signIn}=useContext(AuthContext)
-  const  handleSubmit =(e)=>{
+    const {storeTokenToLS}=useContext(AuthContext)
+
+    //handlesubmit
+  const  handleSubmit = async(e)=>{
    e.preventDefault()
-   console.log(email,password)
-   signIn(email,password)
+   try{
+    const res =await axiosInstance.post('/login',{
+     email,
+     password
+   })
+   //navigate user to home page
+   if(res.statusText ==="OK"){
+    storeTokenToLS(res.data.token)
+    navigate("/")
+   }
+
+   console.log(res.data.token)
+
+   }catch(err){
+    console.log(err)
+   }
+  
+
+//   .then((res)=>{
+//     // setUser(res.data)
+//     console.log(res.data)
+// })
   }
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-200">
+        <div className="min-h-screen flex  justify-center py-10 lg:py-20">
             <div className="max-w-md w-full p-6 bg-white border rounded-md shadow-md">
                 <h2 className="text-2xl font-semibold mb-6 text-center decoration-wavy decoration-pink-300 underline">Login</h2>
                 <form  onSubmit={handleSubmit}>
@@ -40,7 +65,7 @@ const Login = () => {
                     </div>
 
                     <p className='text-blue-500 hover:underline cursor-pointer flex justify-end text-sm'>
-                        <a href="/register">
+                        <a href="/signup">
                             Create an account.
                         </a>
                     </p>

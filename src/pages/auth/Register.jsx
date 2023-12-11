@@ -1,5 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { AuthContext } from '../../context/AuthProvider'
+import axiosInstance from '../../utils/axios'
+import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
     const [name,setName]=useState('')
@@ -8,27 +10,44 @@ const Register = () => {
     const [password,setPassword]=useState('')
     const [confirmPassword,setConfirmPassword]=useState('')
     const [date,setDate]=useState('')
-    const {singnUp}=useContext(AuthContext)
-    const handleSubmit=(e)=>{
+    const navigate =useNavigate()
+    const {storeTokenToLS}=useContext(AuthContext)
+    const handleSubmit= async(e)=>{
         e.preventDefault()
+        
         if(password!=confirmPassword){
             alert('passwoed does not match')
         }
-        const formData = new FormData();
+
+        try{
+            const formData = new FormData();
         
-        formData.append('avatar',image);
-        formData.append('name',name)
-        formData.append('email',email)
-        formData.append('password',password)
-        formData.append('dateofbirth',date)
+            formData.append('avatar',image);
+            formData.append('name',name)
+            formData.append('email',email)
+            formData.append('password',password)
+            formData.append('dateofbirth',date)
+            
+         const result = await axiosInstance.post('/signup',formData)
+             //navigate user to home page
+             console.log(result)
+       if(result.statusText ==="Created"){
+        storeTokenToLS(result.data.token)
+        console.log(result)
+        navigate("/")
+       }
+        }catch(err){
+            console.log(err)
+        }
+      
+            
         
-        singnUp(formData)
         
 
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-200">
+        <div className="min-h-screen flex items-center justify-center ">
             <div className="max-w-md w-full p-6 border bg-white rounded-md shadow-md">
                 <h2 className="text-2xl font-semibold mb-6 text-center">Register as a volunteer</h2>
                 <form onSubmit={handleSubmit}>

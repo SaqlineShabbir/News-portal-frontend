@@ -3,34 +3,33 @@ import axiosInstance from '../utils/axios';
 
 export const AuthContext = createContext(null)
 const AuthProvider = ({children}) => {
-    const [user,setUser]=useState(null)
+    const [token,setToken]=useState(localStorage.getItem("token"))
     const [loading,setLoading]=useState(false)
+   
+    // check loggedin or not
+    let loggedIn = !!token
 
-
-    const singnUp = (formData)=>{
-
-       axiosInstance.post('/signup',formData).then((res)=>{
-            setUser(res.data)
-        })
+    const storeTokenToLS = (token)=>{
+    return  localStorage.setItem('token',token)
+       
       
     }
-
-    const signIn =(email,password)=>{
-        axiosInstance.post('/login',{
-          email,
-          password
-        }).then((res)=>{
-            setUser(res.data)
-        })
-        
+    //logout
+    const logOutUser = ()=>{
+    
+        setToken("")
+        return localStorage.removeItem("token")
     }
+
+   
 
 
     const authInfo ={
-        user,
+        
         loading,
-        singnUp,
-        signIn
+        storeTokenToLS,
+        logOutUser,
+        loggedIn
 
     }
     return (
