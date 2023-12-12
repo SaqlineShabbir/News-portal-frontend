@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const LatestArtiCard = ({article}) => {
-    console.log(article)
+
     return (
         <Link to={{
             pathname: `/article/x`,
@@ -12,7 +12,7 @@ const LatestArtiCard = ({article}) => {
             <div className=''>
             <img   className='h-[170px] lg:w-[350px] w-full'   src={article?.avatar} alt="" />
             </div>
-            <p className='text-xl py-1 hover:text-blue-400'>{article?.title}</p>
+            <p className='text-xl  font-bold py-1 hover:text-blue-400'>{article?.title}</p>
             <p className='text-sm '>{article?.date}</p>
         </div>
         </Link>

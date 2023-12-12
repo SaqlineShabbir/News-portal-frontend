@@ -1,44 +1,80 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axiosInstance from '../../../utils/axios';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../context/AuthProvider';
+import DescriptionLoader from '../../../utils/DescriptionLoader';
+import NewsCard from './NewsCard';
+import Pagination from '../shared/Pagination';
+import MostPopular from '../latest-articles/most-popular/MostPopular';
 
 const News = () => {
     const[allNews,setAllNews]=useState([])
+    const {setLoading,loading}=useContext(AuthContext)
+    const [totalPages,setTotalPages]=useState(0)
+    const [page,setPage]=useState(1)
+
+
+
+    const getPreviousPage = ()=>{
+        setPage(page-1)
+    }
+    const getNextPage = ()=>{
+        setPage(page+1)
+    }
+
+
     useEffect(()=>{
-    axiosInstance.get('/news')
+    axiosInstance.get(`/news?page=${page}`)
     .then((res)=>{
         setAllNews(res?.data.data)
+        setTotalPages(res.data.pageCount)
+        setLoading(false)
     })
-    },[])
+    },[getNextPage,getPreviousPage])
+
+   
+    //decide what to render
+    let content = null
+
+    if(loading){
+        content = <div className='grid grid-cols-1 lg:grid-cols-4  py-10 gap-4 place-content-center lg:px-[200px]'>
+            <DescriptionLoader/>
+            <DescriptionLoader/>
+            <DescriptionLoader/>
+            <DescriptionLoader/>
+            </div>
+    }
+    if(!loading && allNews.length <=0 ){
+        content = <div className='  py-10  place-content-center lg:px-[200px]'>
+        <p>No data Found..</p>
+        </div>
+    }
+
+    if(!loading && allNews.length > 0 ){
+        content=   <div className='lg:flex w-[100%] px-10 lg:px-[200px]'>
+        <div className='left  mx-4 my-20 h-full lg:w-[60%]'>
+        <div className='  text-gray-300 pb-7'>
+              <p className='bg-green-500  text-gray-50 w-[200px]  py-1 px-2'>LATEST NEWS</p>
+              <hr />
+             </div>
+
+            <div className='grid grid-cols-1 sm:grid-cols-2 gap-8'>
+                {
+                    allNews.map((news) => <NewsCard  key={news._id} news={news}></NewsCard>)
+                }
+            </div>
+            <Pagination totalPages={totalPages} page={page} getNextPage={getNextPage} getPreviousPage={getPreviousPage} ></Pagination>
+        </div>
+        <div className='w-[40%] lg:my-20 ml-10'>
+            <MostPopular></MostPopular>
+        </div>
+    </div>
+    }
 
     return (
-        <div className='flex justify-start'>
-            <div className='md:mx-52 mx-4 my-20 h-full'>
-                <span className='uppercase bg-pink-300 px-2 text-black font-bold my-4 py-2 rounded'>Latest News</span>
-                <hr className='my-6' />
-
-                <div className='grid grid-cols-1 sm:grid-cols-2 gap-8'>
-                    {
-                        allNews.map((news) => (
-                         <Link to={{
-                            pathname: `/news/x`,
-                            search: `?id=${news?._id}`,
-                          }}> <div>
-                         <img className='w-full md:w-80 h-52 rounded' src={news?.avatar} alt="image" />
-                         <div className='space-y-4'>
-                             <h2 className='text-2xl my-2  hover:text-blue-400 cursor-pointer duration-300'>{news.title}</h2>
-                             <div className='flex space-x-4'>
-                                 <span className='text-gray-900 font-semibold'>{news.user}</span>
-                                 <span className='text-gray-400'>{news.date}</span>
-                             </div>
-                             <p className='text-gray-500'>{news?.description}</p>
-                         </div>
-                     </div></Link>
-                        ))
-                    }
-                </div>
-            </div>
-        </div>
+       <>
+       {content}
+       </>
     )
 }
 

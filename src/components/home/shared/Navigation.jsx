@@ -6,7 +6,7 @@ import { AuthContext } from '../../../context/AuthProvider';
 import addbanner from '../../../../src/assets/adbanner.jpg'
 export default function Navigation() {
   const [navbar, setNavbar] = useState(false);
-  const {loggedIn}=useContext(AuthContext)
+  const {token}=useContext(AuthContext)
 
   return (
     <nav
@@ -106,13 +106,13 @@ export default function Navigation() {
                   <p>DASHBOARD</p>
                 </NavLink>
               </li>
-             { !loggedIn&&<li className="hover:border-b-2 hover:border-blue-700 lg:px-1 cursor-pointe">
+             { !token&&<li className="hover:border-b-2 hover:border-blue-700 lg:px-1 cursor-pointe">
                 <Link smooth to="/signup">
                   <p>SIGNUP</p>
                 </Link>
               </li>}
              
-               {!loggedIn&& <li className=" hover:text-black-600  cursor-pointer lg:px-1 hover:border-b-2 hover:border-blue-700  ">
+               {!token&& <li className=" hover:text-black-600  cursor-pointer lg:px-1 hover:border-b-2 hover:border-blue-700  ">
                   <NavLink smooth to="/login">
                     <p>LOGIN</p>
                   </NavLink>
@@ -125,12 +125,12 @@ export default function Navigation() {
               </li>
 
             
-                {loggedIn&&<li
+                {token&&<li
                   
                   className=" hover:text-black-600 cursor-pointer"
                 >
                   <NavLink smooth to="/logout">
-                    <p>Logout</p>
+                    <p>LOGOUT</p>
                   </NavLink>
                 </li>}
               

@@ -1,13 +1,22 @@
 import React, { createContext, useState } from 'react';
 import axiosInstance from '../utils/axios';
+import { useEffect } from 'react';
 
 export const AuthContext = createContext(null)
 const AuthProvider = ({children}) => {
-    const [token,setToken]=useState(localStorage.getItem("token"))
-    const [loading,setLoading]=useState(false)
+    const [token,setToken]=useState(null)
+    const [loading,setLoading]=useState(true)
    
     // check loggedin or not
-    let loggedIn = !!token
+    
+    
+   
+
+   useEffect(()=>{
+    setToken(localStorage.getItem("token"))
+  
+    
+   },[setToken,token])
 
     const storeTokenToLS = (token)=>{
     return  localStorage.setItem('token',token)
@@ -27,9 +36,10 @@ const AuthProvider = ({children}) => {
     const authInfo ={
         
         loading,
+        setLoading,
         storeTokenToLS,
         logOutUser,
-        loggedIn
+        token
 
     }
     return (
