@@ -3,6 +3,7 @@ import PerfomanceTraining from "../../components/home/PerfomanceTraining";
 import LatestArticles from "../../components/home/latest-articles/articles/LatestArticles";
 import Footer from "../../components/home/shared/Footer";
 import Navigation from "../../components/home/shared/Navigation";
+import NavaddCard from "../../components/home/shared/NavaddCard";
 
 
 const Home = () => {
@@ -11,6 +12,7 @@ const Home = () => {
             
             <News />
             <PerfomanceTraining />
+            <NavaddCard></NavaddCard>
             <LatestArticles></LatestArticles>
             
         </div>

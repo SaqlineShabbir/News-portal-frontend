@@ -41,9 +41,11 @@ const PerfomanceTraining = () => {
     ];
     return (
         <div className='flex justify-start'>
-            <div className='md:mx-52 mx-4 my-20 h-full'>
-                <span className='uppercase bg-black px-2 text-white font-bold my-4 py-2 rounded'>Perfomane Training</span>
-                <hr className='my-6' />
+            <div className='md:mx-52 mx-4 mt-20 h-full'>
+            <div className='  text-gray-300 pb-7'>
+              <p className='bg-green-500  text-gray-50 w-[300px]  py-1 px-2'>PERFORMANCE TRAINING</p>
+              <hr />
+             </div>
 
                 <div className='space-y-6 grid grid-cols-1'>
                     {

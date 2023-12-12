@@ -6,6 +6,7 @@ import DescriptionLoader from '../../../utils/DescriptionLoader';
 import NewsCard from './NewsCard';
 import Pagination from '../shared/Pagination';
 import MostPopular from '../latest-articles/most-popular/MostPopular';
+import AddCard from '../shared/AddCard';
 
 const News = () => {
     const[allNews,setAllNews]=useState([])
@@ -51,7 +52,7 @@ const News = () => {
     }
 
     if(!loading && allNews.length > 0 ){
-        content=   <div className='lg:flex w-[100%] px-10 lg:px-[200px]'>
+        content=   <div className='lg:flex w-[100%] px-55 lg:px-[200px]'>
         <div className='left  mx-4 my-20 h-full lg:w-[60%]'>
         <div className='  text-gray-300 pb-7'>
               <p className='bg-green-500  text-gray-50 w-[200px]  py-1 px-2'>LATEST NEWS</p>
@@ -65,7 +66,8 @@ const News = () => {
             </div>
             <Pagination totalPages={totalPages} page={page} getNextPage={getNextPage} getPreviousPage={getPreviousPage} ></Pagination>
         </div>
-        <div className='w-[40%] lg:my-20 ml-10'>
+        <div className='lg:w-[40%] lg:my-10 lg:ml-10 px-5 space-y-10 lg:pt-20'>
+            <AddCard></AddCard>
             <MostPopular></MostPopular>
         </div>
     </div>

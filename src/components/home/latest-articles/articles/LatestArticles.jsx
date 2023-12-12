@@ -5,6 +5,7 @@ import axiosInstance from '../../../../utils/axios';
 import Pagination from '../../shared/Pagination';
 import { AuthContext } from '../../../../context/AuthProvider';
 import DescriptionLoader from '../../../../utils/DescriptionLoader';
+import AddCard from '../../shared/AddCard';
 
 const LatestArticles = () => {
   const {setLoading,loading}=useContext(AuthContext)
@@ -69,8 +70,9 @@ const LatestArticles = () => {
              </div>
              <Pagination  totalPages={pageCount} setPage={setPage} page={page} getNextPage={getNextPage} getPreviousPage={getPreviousPage} ></Pagination>
           </div>
-          <div className='right lg:w-[40%]  lg:px-20'>
+          <div className='right lg:w-[40%] space-y-10 lg:px-20'>
            <MostPopular></MostPopular>
+           <AddCard></AddCard>
           </div>
 
       </div>
