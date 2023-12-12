@@ -4,12 +4,13 @@ import LatestArticles from "../../components/home/latest-articles/articles/Lates
 import Footer from "../../components/home/shared/Footer";
 import Navigation from "../../components/home/shared/Navigation";
 import NavaddCard from "../../components/home/shared/NavaddCard";
+import Banner from "../../components/home/banner/Banner";
 
 
 const Home = () => {
     return (
         <div>
-            
+            <Banner></Banner>
             <News />
             <PerfomanceTraining />
             <NavaddCard></NavaddCard>
